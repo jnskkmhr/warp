@@ -240,8 +240,9 @@ class NanogridBase(Geometry):
 
             uvw = wp.volume_world_to_index(grid, pos) + vec3_type(scalar(0.5))
             env_offset = args.env_offsets[env_index]
-            packed_uvw = uvw + vec3_type(env_offset)
-            i, j, k = int(wp.floor(packed_uvw[0])), int(wp.floor(packed_uvw[1])), int(wp.floor(packed_uvw[2]))
+            i = int(wp.floor(uvw[0])) + env_offset[0]
+            j = int(wp.floor(uvw[1])) + env_offset[1]
+            k = int(wp.floor(uvw[2])) + env_offset[2]
             cell_index = grid_geo._lookup_cell_index(args, i, j, k)
 
             if cell_index != -1:
