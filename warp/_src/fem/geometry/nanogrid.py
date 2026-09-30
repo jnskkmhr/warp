@@ -269,8 +269,10 @@ class NanogridBase(Geometry):
             closest_coords = CoordsType()
 
             while closest_cell == NULL_ELEMENT_INDEX:
-                uvw_min = wp.vec3i(uvw - offset * scales) + env_offset
-                uvw_max = wp.vec3i(uvw + offset * scales) + wp.vec3i(1) + env_offset
+                lo = uvw - offset * scales
+                hi = uvw + offset * scales
+                uvw_min = wp.vec3i(wp.floor(lo[0]), wp.floor(lo[1]), wp.floor(lo[2])) + env_offset
+                uvw_max = wp.vec3i(wp.floor(hi[0]), wp.floor(hi[1]), wp.floor(hi[2])) + wp.vec3i(1) + env_offset
 
                 closest_dist = min_cell_size * min_cell_size * scalar(offset * offset)
 
